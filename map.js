@@ -12,6 +12,12 @@ L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_toke
     center: [42.408276, -85.372824]
 }).addTo(map);
 
+const combineIcon = L.icon({
+    iconUrl:'combine.png',
+    iconSize:[100,100],
+    iconAnchor:[50,50],
+})
+
  function processFile() {
     var file = document.querySelector('#input').files[0];
     var reader = new FileReader();
@@ -68,7 +74,7 @@ L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_toke
         var group = new L.featureGroup([polyLine]);
         map.fitBounds(group.getBounds());
 
-        var animatedMarker = L.animatedMarker(dat, data);
+        var animatedMarker = L.animatedMarker(dat, {icon:combineIcon});
 	    map.addLayer(animatedMarker);
     }
  }

@@ -98,16 +98,16 @@ function computeLine(lat2, long2) {
   console.log("hi");
 }
 
-computeLine(42, -85);
-setTimeout(500,)
-computeLine(42, -86);
-setTimeout(500)
-computeLine(42, -87);
-setTimeout(500)
-computeLine(42, -90);
-setTimeout(500)
-computeLine(43, -90);
-setTimeout(500)
-computeLine(44, -90);
+// computeLine(42, -85);
+// setTimeout(500,)
+// computeLine(42, -86);
+// setTimeout(500)
+// computeLine(42, -87);
+// setTimeout(500)
+// computeLine(42, -90);
+// setTimeout(500)
+// computeLine(43, -90);
+// setTimeout(500)
+// computeLine(44, -90);
 // computeLine(42, -86);
 // computeLine(44, -85);
