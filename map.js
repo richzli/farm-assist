@@ -12,11 +12,13 @@ L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_toke
     center: [42.408276, -85.372824]
 }).addTo(map);
 
-const combineIcon = L.icon({
-    iconUrl:'combine.png',
-    iconSize:[100,100],
-    iconAnchor:[50,50],
-})
+// var combineIcon = L.icon({
+//     iconUrl:'combine.png',
+//     iconSize:[100,100],
+//     // iconAnchor:[50,50],
+// })
+// L.marker([42,-85], {icon:combineIcon}).addTo(map)
+
 
  function processFile() {
     var file = document.querySelector('#input').files[0];
@@ -73,8 +75,15 @@ const combineIcon = L.icon({
 
         var group = new L.featureGroup([polyLine]);
         map.fitBounds(group.getBounds());
-
-        var animatedMarker = L.animatedMarker(dat, {icon:combineIcon});
+        var combineIcon = L.icon({
+            iconUrl:'combine.png',
+            iconSize:[100,100],
+            // iconAnchor:[50,50],
+        })
+        // console.log()
+        console.log(combineIcon)
+        var path = L.polyline(dat);
+        var animatedMarker = L.animatedMarker(path.getLatLngs(), {icon:combineIcon});
 	    map.addLayer(animatedMarker);
     }
  }
