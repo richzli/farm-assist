@@ -143,7 +143,7 @@ async function processFile() {
                 prevlong = long;
             }
 
-            await sleep(100);
+            await sleep(1000/runInterval);
         }
 
     }
