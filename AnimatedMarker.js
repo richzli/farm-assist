@@ -75,6 +75,10 @@ L.AnimatedMarker = L.Marker.extend({
       // Move to the next vertex
       this.setLatLng(this._latlngs[this._i]);
       this._i++;
+
+      //this.setRotationOrigin('center center');
+      //console.log(toString(Math.atan((parseFloat(this._latlngs.long) - parseFloat(this.latlongs.long)) / (parseFloat(this._latlngs.lat) - parseFloat(this.latlongs.lat))) * 180 / Math.PI));
+      //this.setRotationAngle(Math.atan((this._latlngs.long - this.latlongs.long) / (this._latlngs.lat - this.latlongs.lat)) * 180 / Math.PI);
   
       // Queue up the animation to the next next vertex
       this._tid = setTimeout(function(){
@@ -84,6 +88,7 @@ L.AnimatedMarker = L.Marker.extend({
           self.animate();
         }
       }, speed);
+      
     },
   
     // Start the animation
