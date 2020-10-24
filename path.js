@@ -29,11 +29,8 @@ function onMapClick(e) {
         for (var i = 1; i < clicks.length; i++) {
             dist += temp.distanceTo(clicks[i]);
         }
-        popup
-            .setLatLng(e.latlng)
-            .setContent("Total Distance: " + dist.toString() + " m\nPounds: " + (dist * rate).toString())
-            .openOn(map);
         document.getElementById("yield").textContent = dist * rate;
+        document.getElementById("dist").textContent = dist;
     }
     
 
@@ -92,7 +89,5 @@ async function processFile() {
         rateAvg /= rateDat.length;
 
         rate = rateAvg;
-
-        alert(rate);
     }
 }
