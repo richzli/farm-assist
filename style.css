@@ -58,12 +58,14 @@ button {
     border-radius: 4px;
     padding: 6px 16px;
     font-weight: 600;
+    cursor: pointer;
 }
 input[type="file"] {
     border-style: none;
 }
 
 a.button {
+    cursor: pointer;
     margin:2px;
     border-style: none;
     background-color: #1976d2;
@@ -76,4 +78,12 @@ a.button {
     appearance: button;
 
     text-decoration: none;
+}
+
+#head1{
+    margin-bottom: 8px;
+}
+
+.combine{
+    max-width: 200px;
 }

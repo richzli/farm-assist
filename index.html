@@ -14,8 +14,8 @@
     <body>
         <div id="container">
             <div id="controls">
-                <div class="card" id="pathLink" style="margin-bottom: 8px;">
-                    <h2>Custom Path Simulation</h2>
+                <div class="card" id="pathLink">
+                    <h2 id="head1">Custom Path Simulation</h2>
                     <a class="button" href="./path.html">Create Custom Path</a>
                 </div>
                 <div class="card">
@@ -25,7 +25,7 @@
 
                 </div>
                 <div class="card">
-                    <h2>Controls</h2>
+                    <h2>Speed Control</h2>
                     <h3>Playback Speed</h3>
                     
                     <button onclick='changeSpeed(0)'>Realtime</button>
@@ -36,6 +36,11 @@
                     <button onclick='changeSpeed(5)'>200x</button>
 
                     <h3>Selected Speed:</h3><span id="selectedSpeed">10x</span>
+                    <h2>Combine Color:</h2>
+                    <button onclick='changeColor(0)'>Red</button>
+                    <button onclick='changeColor(1)'>Blue</button>
+                    <button onclick='changeColor(2)'>Yellow</button>
+                    <img src="combine.png" class="combine" id="combineImage">
                 </div>
             </div>
             <div id="map"></div>
