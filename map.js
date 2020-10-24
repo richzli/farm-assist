@@ -1,5 +1,5 @@
 // initialize the map
-var map = L.map('map').setView([42.408276, -85.372824], 16);
+var map = L.map('map').setView([42.408276, -85.372824], 6);
 
 // load a tile layer
 L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
@@ -48,8 +48,24 @@ L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_toke
             }
         }
         alert(dat.length);
+
+        var latAvg = 0;
+        var longAvg = 0;
+
+        for (x of dat) {
+            latAvg += x[0];
+            longAvg += x[1];
+        }
+        
+        latAvg /= dat.length;
+        longAvg /= dat.length;
+
         var polyLine = L.polyline(dat, {color: 'red', weight: 1}).addTo(map);
-        var animatedMarker = L.animatedMarker(dat, data, interval=10);
+
+        var group = new L.featureGroup([polyLine]);
+        map.fitBounds(group.getBounds());
+
+        var animatedMarker = L.animatedMarker(dat, data);
 	    map.addLayer(animatedMarker);
     }
  }
