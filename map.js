@@ -7,6 +7,10 @@ var intervals = [1000, 50, 20, 10, 5];
 var intervalsText = ['Realtime', '20x', '50x', '100x', '200x'];
 var runInterval = intervals[2];
 
+const combineSrc = ["combine.png", "combineb.png", "combiney.png"]
+const colors = ["Red, Blue, Yellow"]
+let color = colors[0]
+let colorIndex = 0;
 
 const sleep = (delay) => new Promise((resolve) => setTimeout(resolve, delay));
 
@@ -21,6 +25,11 @@ L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_toke
     center: [42.408276, -85.372824]
 }).addTo(map);
 
+function changeColor (index) {
+    color = colors[index]
+    document.getElementById("combineImage").src = combineSrc[index];
+    colorIndex = index;
+}
 function changeSpeed(index) {
     runInterval = intervals[index]
     document.getElementById("selectedSpeed").innerHTML = intervalsText[index];
@@ -108,7 +117,7 @@ async function processFile() {
         map.fitBounds(group.getBounds());
 
         const combineIcon = L.icon({
-            iconUrl:'combine.png',
+            iconUrl:combineSrc[colorIndex],
             iconSize:[25,25],
             // iconAnchor:[50,50],
         });
