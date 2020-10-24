@@ -33,6 +33,7 @@ function onMapClick(e) {
             .setLatLng(e.latlng)
             .setContent("Total Distance: " + dist.toString() + " m\nPounds: " + (dist * rate).toString())
             .openOn(map);
+        document.getElementById("yield").textContent = dist * rate;
     }
     
 
