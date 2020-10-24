@@ -1,6 +1,8 @@
 // initialize the map
 var map = L.map('map').setView([42.408276, -85.372824], 17);
 
+var rate = 0.0;
+
 // load a tile layer
 L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
     attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
@@ -29,14 +31,67 @@ function onMapClick(e) {
         }
         popup
             .setLatLng(e.latlng)
-            .setContent("Total Distance: " + dist.toString())
+            .setContent("Total Distance: " + dist.toString() + " m\nPounds: " + (dist * rate).toString())
             .openOn(map);
     }
     
 
+
 }
 
-
-
-
 map.on('click', onMapClick);
+
+var time = 0;
+
+async function processFile() {
+    time += 1;
+    var file = document.querySelector('#input').files[0];
+    var reader = new FileReader();
+    reader.readAsText(file);
+
+    reader.onload = async function(event) {
+        var curr = time;
+        var data = event.target.result;
+
+        document.getElementById("data").innerText = data;
+
+        var rows = data.split('\n');
+
+        var rateDat = [];
+
+        //move line by line
+        for (var i = rows.length - 1; i > 0; i--) {
+            //split by separator (,) and get the columns
+            cols = rows[i].split(',');
+
+            //alert(cols[2] + " " + cols[5]);
+
+            var pound = parseFloat(cols[2]);
+            var moved = parseFloat(cols[5]);
+            
+            //alert(lat, long);
+
+            if (!isNaN(pound) && !isNaN(moved)) {
+                rateDat.push([pound, moved]);
+                //var marker = L.marker([lat, long]).addTo(map);
+            }
+            
+            //move column by column
+            for (var j = 0; j < cols.length; j++) {
+                var value = cols[j];
+            }
+        }
+
+        var rateAvg = 0.0;
+
+        for (x of rateDat) {
+            rateAvg += x[0] / (x[1] * 0.0254);
+        }
+
+        rateAvg /= rateDat.length;
+
+        rate = rateAvg;
+
+        alert(rate);
+    }
+}

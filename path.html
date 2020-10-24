@@ -6,12 +6,24 @@
         <script src="https://d19vzq90twjlae.cloudfront.net/leaflet-0.7.3/leaflet.js"></script>
         <script type="text/javascript" src="MovingMarker.js"></script>
         <script src="AnimatedMarker.js"></script>
+        <script src="Leaflet.RotatedMarker.js"></script>
 
         <link rel="stylesheet" href="style.css" />
     </head>
 
     <body>
-        <div id="map"></div>
+        <div id="container">
+            <div id="controls">
+                <div class="card">
+                    <h2>Input Data</h2>
+                    <input type="file" id="input">
+                    <button onclick='processFile()'>upload dataset</button>
+
+                </div>
+            </div>
+            <div id="map"></div>
+        </div>
         <script src="path.js"></script>
+        <div id="data"></div>
     </body>
 </html>
