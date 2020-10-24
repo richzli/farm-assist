@@ -11,7 +11,7 @@ L.AnimatedMarker = L.Marker.extend({
       clickable: false
     },
   
-    initialize: function (latlngs, data, options) {
+    initialize: function (latlngs, options) {
       this.setLine(latlngs);
       L.Marker.prototype.initialize.call(this, latlngs[0], options);
     },

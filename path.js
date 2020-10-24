@@ -14,13 +14,28 @@ L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_toke
 
 var clicks = [];
 var polyLine = L.polyline(clicks, {color: 'red', weight: 3}).addTo(map);
+var popup = L.popup();
 
 function onMapClick(e) {
     clicks.push(e.latlng);
     polyLine.setLatLngs(clicks);
     polyLine.redraw();
 
+    if (clicks.length > 1) {
+        var temp = clicks[0];
+        var dist = 0.000;
+        for (var i = 1; i < clicks.length; i++) {
+            dist += temp.distanceTo(clicks[i]);
+        }
+        popup
+            .setLatLng(e.latlng)
+            .setContent("Total Distance: " + dist.toString())
+            .openOn(map);
+    }
+    
+
 }
+
 
 
 
