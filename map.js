@@ -69,8 +69,13 @@ L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_toke
         var group = new L.featureGroup([polyLine]);
         map.fitBounds(group.getBounds());
 
+        const combineIcon = L.icon({
+            iconUrl:'combine.png',
+            iconSize:[25,25],
+            // iconAnchor:[50,50],
+        });
 
-        var animatedMarker = L.animatedMarker(dat);
+        var animatedMarker = L.animatedMarker(dat, {icon: combineIcon});
 	    map.addLayer(animatedMarker);
     }
  }
