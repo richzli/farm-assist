@@ -21,5 +21,18 @@ L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_toke
         var data = event.target.result;
 
         document.getElementById("data").innerText = data;
+
+        var rows = data.split('\n');
+
+        //move line by line
+        for (var i = rows.length - 1; i > 0; i--) {
+            //split by separator (,) and get the columns
+            cols = rows[i].split(',');
+
+            //move column by column
+            for (var j = 0; j < cols.length; j++) {
+                var value = cols[j];
+            }
+        }
     }
  }
