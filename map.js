@@ -47,6 +47,7 @@ L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_toke
                 var value = cols[j];
             }
         }
+
         alert(dat.length);
 
         var latAvg = 0;
@@ -61,11 +62,15 @@ L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_toke
         longAvg /= dat.length;
 
         var polyLine = L.polyline(dat, {color: 'red', weight: 1}).addTo(map);
+<<<<<<< HEAD
 
         var group = new L.featureGroup([polyLine]);
         map.fitBounds(group.getBounds());
 
         var animatedMarker = L.animatedMarker(dat, data);
+=======
+        var animatedMarker = L.animatedMarker(dat);
+>>>>>>> 87ce7b9e87abdf892e35536cc8e6c74f5dd83ca5
 	    map.addLayer(animatedMarker);
     }
  }
