@@ -3,9 +3,9 @@ var map = L.map('map').setView([42.408276, -85.372824], 6);
 var time = 0;
 var markers = [];
 
-var intervals = [1000, 50, 20, 10, 5];
-var intervalsText = ['Realtime', '20x', '50x', '100x', '200x'];
-var runInterval = intervals[2];
+var intervals = [1000, 100, 50, 20, 10, 5];
+var intervalsText = ['Realtime', '10x', '20x', '50x', '100x', '200x'];
+var runInterval = intervals[1];
 
 
 const sleep = (delay) => new Promise((resolve) => setTimeout(resolve, delay));
@@ -22,7 +22,7 @@ L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_toke
 }).addTo(map);
 
 function changeSpeed(index) {
-    runInterval = intervals[index]
+    runInterval = intervals[index];
     document.getElementById("selectedSpeed").innerHTML = intervalsText[index];
 }
 
@@ -49,6 +49,7 @@ function getDistanceFromLatLonInKm(latitude1,longitude1,latitude2,longitude2,uni
 
 async function processFile() {
     time += 1;
+    var spddd = runInterval;
     var file = document.querySelector('#input').files[0];
     var reader = new FileReader();
     reader.readAsText(file);
@@ -56,8 +57,6 @@ async function processFile() {
     reader.onload = async function(event) {
         var curr = time;
         var data = event.target.result;
-
-        document.getElementById("data").innerText = data;
 
         var rows = data.split('\n');
 
@@ -123,16 +122,21 @@ async function processFile() {
         for (var i = rows.length - 1; i > 0 && time == curr; i--) {
             cols = rows[i].split(',');
             
+            // yield
             if (!isNaN(parseFloat(cols[2]))) {
                 sum += parseFloat(cols[2]);
                 document.getElementById("yield").textContent = Math.round(sum * 100)/100;
+                document.getElementById("avg-yield").textContent = Math.round(sum * 100 / (rows.length - i)) / 100;
             }
 
+            // speed and position
             var lat = parseFloat(cols[1]);
             var long = parseFloat(cols[0]);
             tt += 1;
 
             if (!isNaN(lat) && !isNaN(long)) {
+                document.getElementById("lat").textContent = Math.abs(lat).toString() + (lat >= 0 ? "°N": "°S");
+                document.getElementById("long").textContent = Math.abs(long).toString() + (long >= 0 ? "°E": "°W");
                 if (prevlat != 0 && prevlong != 0) {
                     var speed = Math.round(getDistanceFromLatLonInKm(lat, long, prevlat, prevlong, "miles") / tt * 360000) / 100;
                     console.log(speed);
@@ -143,7 +147,7 @@ async function processFile() {
                 prevlong = long;
             }
 
-            await sleep(1000/runInterval);
+            await sleep(spddd);
         }
 
     }
