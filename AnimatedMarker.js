@@ -1,5 +1,10 @@
 L.AnimatedMarker = L.Marker.extend({
     options: {
+      icon: L.icon({
+        iconUrl:'combine.png',
+        iconSize:[25,25],
+        // iconAnchor:[50,50],
+    }),
       // meters
       distance: 200,
       // ms
