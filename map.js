@@ -16,11 +16,6 @@ L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_toke
     center: [42.408276, -85.372824]
 }).addTo(map);
 
-const combineIcon = L.icon({
-    iconUrl:'combine.png',
-    iconSize:[100,100],
-    iconAnchor:[50,50],
-})
 
 function getDistanceFromLatLonInKm(latitude1,longitude1,latitude2,longitude2,units) {
     var earthRadius = 6371; // Radius of the earth in km
@@ -103,6 +98,7 @@ async function processFile() {
         var group = new L.featureGroup([polyLine]);
         map.fitBounds(group.getBounds());
 
+<<<<<<< HEAD
         var animatedMarker = L.animatedMarker(dat, {icon:combineIcon});
         map.addLayer(animatedMarker);
         markers.push(animatedMarker);
@@ -137,5 +133,15 @@ async function processFile() {
             await sleep(100);
         }
 
+=======
+        const combineIcon = L.icon({
+            iconUrl:'combine.png',
+            iconSize:[25,25],
+            // iconAnchor:[50,50],
+        });
+
+        var animatedMarker = L.animatedMarker(dat, {icon: combineIcon});
+	    map.addLayer(animatedMarker);
+>>>>>>> 1caf83a76e7321eb787e0940bfabf62b3a474b42
     }
 }
