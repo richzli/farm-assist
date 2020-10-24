@@ -1,5 +1,5 @@
 // initialize the map
-var map = L.map('map').setView([42.408276, -85.372824], 16);
+var map = L.map('map').setView([42.408276, -85.372824], 17);
 
 // load a tile layer
 L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
@@ -12,15 +12,14 @@ L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_toke
     center: [42.408276, -85.372824]
 }).addTo(map);
 
-var polyLine = L.polyline(dat, {color: 'red', weight: 1}).addTo(map);
-
 var clicks = [];
+var polyLine = L.polyline(clicks, {color: 'red', weight: 3}).addTo(map);
 
 function onMapClick(e) {
-    popup
-        .setLatLng(e.latlng)
-        .setContent("You clicked the map at " + e.latlng.toString())
-        .openOn(map);
+    clicks.push(e.latlng);
+    polyLine.setLatLngs(clicks);
+    polyLine.redraw();
+
 }
 
 
