@@ -22,10 +22,15 @@
                 </div>
                 <div class="card">
                     <h2>Controls</h2>
-                    <button>sdfad</button>
-                    <button>sdfad</button>
-                    <button>sdfad</button>
-                    <button>sdfad</button>
+                    <h3>Playback Speed</h3>
+                    
+                    <button onclick='changeSpeed(0)'>Realtime</button>
+                    <button onclick='changeSpeed(1)'>20x</button>
+                    <button onclick='changeSpeed(2)'>50x</button>
+                    <button onclick='changeSpeed(3)'>100x</button>
+                    <button onclick='changeSpeed(4)'>200x</button>
+
+                    <h3>Selected Speed:</h3><span id="selectedSpeed">20x</span>
                 </div>
             </div>
             <div id="map"></div>

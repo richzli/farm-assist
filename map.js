@@ -3,6 +3,11 @@ var map = L.map('map').setView([42.408276, -85.372824], 6);
 var time = 0;
 var markers = [];
 
+var intervals = [1000, 50, 20, 10, 5];
+var intervalsText = ['Realtime', '20x', '50x', '100x', '200x'];
+var runInterval = intervals[2];
+
+
 const sleep = (delay) => new Promise((resolve) => setTimeout(resolve, delay));
 
 // load a tile layer
@@ -16,6 +21,10 @@ L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_toke
     center: [42.408276, -85.372824]
 }).addTo(map);
 
+function changeSpeed(index) {
+    runInterval = intervals[index]
+    document.getElementById("selectedSpeed").innerHTML = intervalsText[index];
+}
 
 function getDistanceFromLatLonInKm(latitude1,longitude1,latitude2,longitude2,units) {
     var earthRadius = 6371; // Radius of the earth in km
@@ -103,7 +112,7 @@ async function processFile() {
             iconSize:[25,25],
             // iconAnchor:[50,50],
         });
-        var animatedMarker = L.animatedMarker(dat, {icon:combineIcon});
+        var animatedMarker = L.animatedMarker(dat, {icon:combineIcon, interval: runInterval});
         map.addLayer(animatedMarker);
         markers.push(animatedMarker);
 
