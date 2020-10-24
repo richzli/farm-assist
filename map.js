@@ -1,5 +1,5 @@
 // initialize the map
-var map = L.map('map').setView([42.35, -71.08], 13);
+var map = L.map('map').setView([42.408276, -85.372824], 16);
 
 // load a tile layer
 L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
@@ -11,3 +11,15 @@ L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_toke
     accessToken: 'sk.eyJ1IjoicHJhbmFuZGFyYW8iLCJhIjoiY2tnbnR2YWR5MDVoYTJ5cXk4azhyZnlsNSJ9.5f4PYrU5R87SUGmkb3VDkQ', 
     center: [42.408276, -85.372824]
 }).addTo(map);
+
+ function processFile() {
+    var file = document.querySelector('#input').files[0];
+    var reader = new FileReader();
+    reader.readAsText(file);
+
+    reader.onload = function(event) {
+        var data = event.target.result;
+
+        document.getElementById("data").innerText = data;
+    }
+ }
