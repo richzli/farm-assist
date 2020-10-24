@@ -48,7 +48,8 @@ L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_toke
             }
         }
         alert(dat.length);
-        var animatedMarker = L.animatedMarker(dat, interval=100);
+        var polyLine = L.polyline(dat, {color: 'red', weight: 1}).addTo(map);
+        var animatedMarker = L.animatedMarker(dat, data, interval=10);
 	    map.addLayer(animatedMarker);
     }
  }
