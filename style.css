@@ -1,1 +1,18 @@
-#map{ width: 900px; height: 500px; }
+:root {
+    font-family: monospace;
+    font-size: 14px;
+}
+
+#container {
+    display: flex;
+    padding: 15px;
+}
+
+#map {
+    width: 600px;
+    height: 600px;
+}
+
+#stats {
+    padding: 50px;
+}

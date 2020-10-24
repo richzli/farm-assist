@@ -1,5 +1,9 @@
 // initialize the map
 var map = L.map('map').setView([42.408276, -85.372824], 6);
+var time = 0;
+var markers = [];
+
+const sleep = (delay) => new Promise((resolve) => setTimeout(resolve, delay));
 
 // load a tile layer
 L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
@@ -18,12 +22,35 @@ const combineIcon = L.icon({
     iconAnchor:[50,50],
 })
 
- function processFile() {
+function getDistanceFromLatLonInKm(latitude1,longitude1,latitude2,longitude2,units) {
+    var earthRadius = 6371; // Radius of the earth in km
+    var p = 0.017453292519943295;
+    var dLat = p * (latitude2-latitude1); 
+    var dLon = p * (longitude2-longitude1); 
+    var a = 
+      Math.sin(dLat/2) * Math.sin(dLat/2) +
+      Math.cos(p * (latitude1)) * Math.cos(p * (latitude2)) * 
+      Math.sin(dLon/2) * Math.sin(dLon/2)
+      ; 
+    var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
+    var d = earthRadius * c; 
+    var miles = d / 1.609344; 
+  
+    if ( units == 'km' ) {  
+        return d; 
+    } else {
+        return miles; 
+    }
+}
+
+async function processFile() {
+    time += 1;
     var file = document.querySelector('#input').files[0];
     var reader = new FileReader();
     reader.readAsText(file);
 
-    reader.onload = function(event) {
+    reader.onload = async function(event) {
+        var curr = time;
         var data = event.target.result;
 
         document.getElementById("data").innerText = data;
@@ -39,7 +66,6 @@ const combineIcon = L.icon({
 
             var lat = parseFloat(cols[1]);
             var long = parseFloat(cols[0]);
-
             
             //alert(lat, long);
 
@@ -54,8 +80,6 @@ const combineIcon = L.icon({
             }
         }
 
-        alert(dat.length);
-
         var latAvg = 0;
         var longAvg = 0;
 
@@ -67,14 +91,51 @@ const combineIcon = L.icon({
         latAvg /= dat.length;
         longAvg /= dat.length;
 
-        //markers.clearLayers();
+        markers.forEach(function(marker) {
+            map.removeLayer(marker);
+        });
+        markers = [];
 
-        var polyLine = L.polyline(dat, {color: 'red', weight: 1}).addTo(map);
+        var polyLine = L.polyline(dat, {color: 'red', weight: 1});
+        map.addLayer(polyLine);
+        markers.push(polyLine);
 
         var group = new L.featureGroup([polyLine]);
         map.fitBounds(group.getBounds());
 
         var animatedMarker = L.animatedMarker(dat, {icon:combineIcon});
-	    map.addLayer(animatedMarker);
+        map.addLayer(animatedMarker);
+        markers.push(animatedMarker);
+
+        var sum = 0;
+        var prevlat = 0;
+        var prevlong = 0;
+        var tt = 0;
+        for (var i = rows.length - 1; i > 0 && time == curr; i--) {
+            cols = rows[i].split(',');
+            
+            if (!isNaN(parseFloat(cols[2]))) {
+                sum += parseFloat(cols[2]);
+                document.getElementById("yield").textContent = Math.round(sum * 100)/100;
+            }
+
+            var lat = parseFloat(cols[1]);
+            var long = parseFloat(cols[0]);
+            tt += 1;
+
+            if (!isNaN(lat) && !isNaN(long)) {
+                if (prevlat != 0 && prevlong != 0) {
+                    var speed = Math.round(getDistanceFromLatLonInKm(lat, long, prevlat, prevlong, "miles") / tt * 360000) / 100;
+                    console.log(speed);
+                    document.getElementById("speed").textContent = speed;
+                    tt = 0;
+                }
+                prevlat = lat;
+                prevlong = long;
+            }
+
+            await sleep(100);
+        }
+
     }
- }
+}

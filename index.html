@@ -11,11 +11,19 @@
     </head>
 
     <body>
-        <div id="map"></div>
+        <div id="container">
+            <div id="map"></div>
+            <div id="stats">
+                <input type="file" id="input"><button onclick='processFile()'>upload dataset</button>
+
+                <p>total yield: <span id="yield">0</span> lbs</p>
+
+                <p>speed: <span id="speed">0</span> mph</p>
+            </div>
+        </div>
         <script src="map.js"></script>
         <script src="Leaflet.imageTransform.js"></script>
         <script src="map2.js"></script>
-        <input type="file" id="input"><button onclick='processFile()'>upload dataset</button>
         <div id="data"></div>
     </body>
 </html>
