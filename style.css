@@ -1,6 +1,7 @@
 :root {
     font-family: monospace;
     font-size: 14px;
+    background-color: #eee;
 }
 
 #container {
@@ -9,7 +10,7 @@
 }
 #controls{
     flex:1;
-    display:'flex',
+    display:'flex';
     flex-direction:'column'
 }
 
@@ -24,3 +25,22 @@
     /* padding: 50px; */
 }
 
+.card {
+    margin:8px;
+    padding:8px;
+    box-shadow: 0px 2px 1px -1px rgba(0,0,0,0.2),0px 1px 1px 0px rgba(0,0,0,0.14),0px 1px 3px 0px rgba(0,0,0,0.12);
+    border-radius: 4px;
+    color: rgba(0, 0, 0, 0.87);
+    background-color: #fff;
+
+}
+.num {
+    font-size: 2rem;
+    font-weight: 600;
+}
+.numText {
+    text-align: center;
+}
+h1, h2, h3, h4, h5, h6{
+    margin:0;
+}
