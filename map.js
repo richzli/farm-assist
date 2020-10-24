@@ -24,15 +24,31 @@ L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_toke
 
         var rows = data.split('\n');
 
+        var dat = [];
+
         //move line by line
         for (var i = rows.length - 1; i > 0; i--) {
             //split by separator (,) and get the columns
             cols = rows[i].split(',');
 
+            var lat = parseFloat(cols[1]);
+            var long = parseFloat(cols[0]);
+
+            
+            //alert(lat, long);
+
+            if (!isNaN(lat) && !isNaN(long)) {
+                dat.push([lat, long]);
+                //var marker = L.marker([lat, long]).addTo(map);
+            }
+            
             //move column by column
             for (var j = 0; j < cols.length; j++) {
                 var value = cols[j];
             }
         }
+        alert(dat.length);
+        var animatedMarker = L.animatedMarker(dat, interval=100);
+	    map.addLayer(animatedMarker);
     }
  }
