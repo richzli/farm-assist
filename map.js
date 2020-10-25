@@ -90,8 +90,8 @@ async function processFile() {
             var distance = parseFloat(cols[5]);
             var elevation = parseFloat(cols[14]);
 
-            radarData = [lat, long, flow, distance, elevation];
-            radarLabels = ['latitude', 'longitude', 'flow', 'distance', 'elevation'];
+            // radarData = [lat, long, flow, distance, elevation];
+            // radarLabels = ['latitude', 'longitude', 'flow', 'distance', 'elevation'];
             //alert(lat, long);
 
             if (!isNaN(lat) && !isNaN(long)) {
@@ -133,9 +133,9 @@ async function processFile() {
             var distance = parseFloat(cols[5]);
             var elevation = parseFloat(cols[14]);
 
-            radarData = [lat, long, flow, distance, elevation];
-            radarLabels = ['latitude', 'longitude', 'flow', 'distance', 'elevation'];
-            radarChart.update();
+            // radarData = [lat, long, flow, distance, elevation];
+            // radarLabels = ['latitude', 'longitude', 'flow', 'distance', 'elevation'];
+            // radarChart.update();
             
             chartUpdate -= spddd;
 

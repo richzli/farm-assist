@@ -35,7 +35,7 @@
 
 #stats {
     margin:8px;
-    flex:2;
+    flex:1;
     /* padding: 50px; */
 }
 
@@ -48,6 +48,7 @@
     background-color: #fff;
     margin-bottom: 8px;
     flex:1;
+    /* max-width: 300px; */
 }
 .num {
     font-size: 2rem;

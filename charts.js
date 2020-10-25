@@ -1,126 +1,164 @@
-const speedData = []
-const speedLabels = []
-const speedChartElement = document.getElementById('speedChart');
+const speedData = [];
+const speedLabels = [];
+const speedChartElement = document.getElementById("speedChart");
 
-const recentSpeedData = []
-const recentSpeedLabels = []
-const recentSpeedChartElement = document.getElementById('recentSpeedChart');
+const recentSpeedData = [];
+const recentSpeedLabels = [];
+const recentSpeedChartElement = document.getElementById("recentSpeedChart");
 
-const yieldData = []
+const yieldData = [];
 
-var radarData = []
-var radarLabels = []
+var radarData = [];
+var radarLabels = [];
 //const radarChartElement = document.getElementById('radarChart');
 
 const kylecolors = {
-  red:'#FF6384',
-  blue:'#36A2EB',
-  yellow:'#ffcd56'
-}
+  red: "#FF6384",
+  blue: "#36A2EB",
+  yellow: "#ffcd56",
+};
 const speedChart = new Chart(speedChartElement, {
-    type: 'line',
-    data: {
-        labels: speedLabels,
-        datasets: [
-        {
-					label: 'Combine Speed',
-					data: speedData,
-					borderColor: kylecolors.red,
-					backgroundColor: 'rgba(0, 0, 0, 0)',
-          fill: false,
-					// cubicInterpolationMode: 'monotone'
-				},]
+  type: "line",
+  data: {
+    labels: speedLabels,
+    datasets: [
+      {
+        label: "Combine Speed",
+        data: speedData,
+        borderColor: kylecolors.red,
+        backgroundColor: "rgba(0, 0, 0, 0)",
+        fill: false,
+        // cubicInterpolationMode: 'monotone'
+      },
+    ],
+  },
+  options: {
+    legend: {
+      display: false,
     },
-    options: {
-      legend:{
-        display:false,
-      },
-      responsive: true,
-      title: {
+    responsive: true,
+    title: {
+      display: true,
+      text: "Total Speed",
+    },
+    scales: {
+      x: {
         display: true,
-        text: 'Total Speed'
-      },
-      scales: {
-        x: {
+        scaleLabel: {
           display: true,
-          scaleLabel: {
-            display: true,
-            labelString: 'Month'
-          }
+          labelString: "Month",
         },
-        y: {
+      },
+      y: {
+        display: true,
+        scaleLabel: {
           display: true,
+          labelString: "Value",
+        },
+      },
+      yAxes: [
+        {
+   
           scaleLabel: {
             display: true,
-            labelString: 'Value'
+            labelString: 'Speed mph'
+          },
+          ticks: {
+            beginAtZero: true,
           },
         },
-        yAxes: [{
-          ticks: {
-              beginAtZero:true,
-          }
-      }]
-      }
-    }
+        
+      ],
+    },
+  },
 });
 const recentSpeedChart = new Chart(recentSpeedChartElement, {
-    type: 'line',
-    data: {
-        labels: recentSpeedLabels,
-        datasets: [
-        {
-					label: 'Combine Speed',
-					data: recentSpeedData,
-					borderColor: kylecolors.blue,
-					backgroundColor: 'rgba(0, 0, 0, 0)',
-          fill: false,
-          
-					// cubicInterpolationMode: 'monotone'
-				},
-        {
-					label: 'Crop Yield',
-					data: yieldData,
-					borderColor: kylecolors.yellow,
-					backgroundColor: 'rgba(0, 0, 0, 0)',
-          fill: false,
-					// cubicInterpolationMode: 'monotone'
-				},]
+  type: "line",
+  data: {
+    labels: recentSpeedLabels,
+    datasets: [
+      {
+        label: "Combine Speed",
+        data: recentSpeedData,
+        borderColor: kylecolors.blue,
+        backgroundColor: "rgba(0, 0, 0, 0)",
+        fill: false,
+        // yAxisID:'speed'
+        // cubicInterpolationMode: 'monotone'
+      },
+      {
+        label: "Crop Yield",
+        data: yieldData,
+        borderColor: kylecolors.yellow,
+        backgroundColor: "rgba(0, 0, 0, 0)",
+        fill: false,
+        // yAxisID:'yield'
+        // cubicInterpolationMode: 'monotone'
+      },
+    ],
+  },
+  options: {
+    legend: {
+      display: false,
     },
-    options: {
-      legend:{
-        display:false,
-      },
-      responsive: true,
-      title: {
+    responsive: true,
+    title: {
+      display: true,
+      text: "Recent Speed",
+    },
+    scales: {
+      x: {
         display: true,
-        text: 'Recent Speed'
-      },
-      scales: {
-        x: {
+        scaleLabel: {
           display: true,
-          scaleLabel: {
-            display: true,
-            labelString: 'Month'
-          }
+          labelString: "Month",
         },
-        y: {
-          display: true,
+      },
+      // speed: {
+      //   display: true,
+      //   position:'left',
+      //   scaleLabel: {
+      //     display: true,
+      //     labelString: 'Value'
+      //   },
+      // },
+      // yield: {
+      //   position:'right',
+      //   display: true,
+        // scaleLabel: {
+        //   display: true,
+        //   labelString: 'Value'
+        // },
+      // },
+      yAxes: [
+        {
+          id: "yield",
+          position:"right",
           scaleLabel: {
             display: true,
-            labelString: 'Value'
+            labelString: 'Yield lbs'
+          },
+          ticks: {
+            beginAtZero: true,
           },
         },
-        yAxes: [{
+        {
+          id: "speed",
+          scaleLabel: {
+            display: true,
+            labelString: 'Speed mph'
+          },
           ticks: {
-              beginAtZero:true,
-          }
-      }]
-      }
-    }
+            beginAtZero: true,
+          },
+        },
+      ],
+    },
+  },
 });
 
-const radarChart = new Chart(radarChartElement, {
-  type: 'radar',
-  data: radarData,
-  labels: radarLabels
-});
+// const radarChart = new Chart(radarChartElement, {
+//   type: 'radar',
+//   data: radarData,
+//   labels: radarLabels
+// });
