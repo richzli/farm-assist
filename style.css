@@ -38,7 +38,9 @@
     flex:2;
     /* padding: 50px; */
 }
-
+#latlngb{
+    margin-right: 8px;
+}
 .card {
     /* margin:8px; */
     padding:8px;
