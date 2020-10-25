@@ -18,6 +18,10 @@ var clicks = [];
 var polyLine = L.polyline(clicks, {color: 'red', weight: 3}).addTo(map);
 var popup = L.popup();
 
+var yieldData = [];
+var yieldLabels = [];
+var counter = 1;
+
 function onMapClick(e) {
     clicks.push(e.latlng);
     polyLine.setLatLngs(clicks);
@@ -29,13 +33,36 @@ function onMapClick(e) {
         for (var i = 1; i < clicks.length; i++) {
             dist += temp.distanceTo(clicks[i]);
         }
+        yieldData.push(dist * rate);
+        yieldLabels.push(counter);
+        counter += 1;
         document.getElementById("yield").textContent = dist * rate;
         document.getElementById("dist").textContent = dist;
+        yieldChart.update();
+        console.log(yieldLabels);
     }
-    
-
-
 }
+
+var ctx = document.getElementById('yieldChart').getContext('2d');
+var yieldChart = new Chart(ctx, {
+    type: 'line',
+    labels: yieldLabels,
+    data: {
+        datasets: [{
+            label: '# of Votes',
+            data: yieldData,
+        }]
+    },
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true
+                }
+            }]
+        }
+    }
+});
 
 map.on('click', onMapClick);
 
@@ -73,21 +100,18 @@ async function processFile() {
                 rateDat.push([pound, moved]);
                 //var marker = L.marker([lat, long]).addTo(map);
             }
-            
-            //move column by column
-            for (var j = 0; j < cols.length; j++) {
-                var value = cols[j];
-            }
         }
 
         var rateAvg = 0.0;
 
         for (x of rateDat) {
-            rateAvg += x[0] / (x[1] * 0.0254);
+            rateAvg += x[0] / ((x[1] + 1) * 0.0254);
         }
 
         rateAvg /= rateDat.length;
 
         rate = rateAvg;
+
+        alert(rate);
     }
 }
