@@ -5,6 +5,11 @@ const speedChartElement = document.getElementById('speedChart');
 const recentSpeedData = []
 const recentSpeedLabels = []
 const recentSpeedChartElement = document.getElementById('recentSpeedChart');
+
+const radarData = []
+const radarLabels = []
+const radarChartElement = document.getElementById('radarChart');
+
 const kylecolors = {
   red:'#FF6384',
   blue:'#36A2EB',
@@ -104,3 +109,8 @@ const recentSpeedChart = new Chart(recentSpeedChartElement, {
     }
 });
 
+const radarChart = new Chart(radarChartElement, {
+  type: 'radar',
+  data: radarData,
+  labels: radarLabels
+});
