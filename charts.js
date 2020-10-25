@@ -1,32 +1,37 @@
 const speedData = []
+const speedLabels = []
 const speedChartElement = document.getElementById('speedChart');
+
+const recentSpeedData = []
+const recentSpeedLabels = []
+const recentSpeedChartElement = document.getElementById('recentSpeedChart');
+const kylecolors = {
+  red:'#FF6384',
+  blue:'#36A2EB',
+  yellow:'#ffcd56'
+}
 const speedChart = new Chart(speedChartElement, {
     type: 'line',
     data: {
-        labels: ['Time'],
+        labels: speedLabels,
         datasets: [
         {
 					label: 'Combine Speed',
 					data: speedData,
-					borderColor: '#ffec4a',
+					borderColor: kylecolors.red,
 					backgroundColor: 'rgba(0, 0, 0, 0)',
-					fill: false,
+          fill: false,
 					// cubicInterpolationMode: 'monotone'
 				},]
     },
     options: {
+      legend:{
+        display:false,
+      },
       responsive: true,
       title: {
         display: true,
-        text: 'Chart.js Line Chart'
-      },
-      tooltips: {
-        mode: 'index',
-        intersect: false,
-      },
-      hover: {
-        mode: 'nearest',
-        intersect: true
+        text: 'Total Speed'
       },
       scales: {
         x: {
@@ -42,9 +47,59 @@ const speedChart = new Chart(speedChartElement, {
             display: true,
             labelString: 'Value'
           },
-          // suggestedMin: -10,
-					suggestedMax: 10
-        }
+        },
+        yAxes: [{
+          ticks: {
+              beginAtZero:true,
+          }
+      }]
+      }
+    }
+});
+const recentSpeedChart = new Chart(recentSpeedChartElement, {
+    type: 'line',
+    data: {
+        labels: recentSpeedLabels,
+        datasets: [
+        {
+					label: 'Combine Speed',
+					data: recentSpeedData,
+					borderColor: kylecolors.blue,
+					backgroundColor: 'rgba(0, 0, 0, 0)',
+          fill: false,
+          
+					// cubicInterpolationMode: 'monotone'
+				},]
+    },
+    options: {
+      legend:{
+        display:false,
+      },
+      responsive: true,
+      title: {
+        display: true,
+        text: 'Total Speed'
+      },
+      scales: {
+        x: {
+          display: true,
+          scaleLabel: {
+            display: true,
+            labelString: 'Month'
+          }
+        },
+        y: {
+          display: true,
+          scaleLabel: {
+            display: true,
+            labelString: 'Value'
+          },
+        },
+        yAxes: [{
+          ticks: {
+              beginAtZero:true,
+          }
+      }]
       }
     }
 });
