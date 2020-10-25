@@ -78,7 +78,7 @@ L.AnimatedMarker = L.Marker.extend({
 
       this.setRotationOrigin('center center');
 
-      console.log(Math.atan((this._latlngs[this._i - 1][1] - this._latlngs[this._i][1]) / (this._latlngs[this._i - 1][0] - this._latlngs[this._i][0])) * 180 / Math.PI);
+      // console.log(Math.atan((this._latlngs[this._i - 1][1] - this._latlngs[this._i][1]) / (this._latlngs[this._i - 1][0] - this._latlngs[this._i][0])) * 180 / Math.PI);
 
       this.setRotationAngle(Math.atan((this._latlngs[this._i - 1][1] - this._latlngs[this._i][1]) / (this._latlngs[this._i - 1][0] - this._latlngs[this._i][0])) * 180 / Math.PI);
   

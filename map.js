@@ -1,7 +1,7 @@
 // initialize the map
 // I think zoom controls are nice to have
 // {zoomControl:false, scrollWheelZoom: false}
-var map = L.map('map').setView([42.408276, -85.372824], 6);
+var map = L.map('map', {scrollWheelZoom:false}).setView([42.408276, -85.372824], 6);
 var time = 0;
 var markers = [];
 
