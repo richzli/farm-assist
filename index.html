@@ -1,72 +1,79 @@
 <html>
+  <head>
+    <title>Combine Harvester Simulation</title>
+    <link
+      rel="stylesheet"
+      href="https://d19vzq90twjlae.cloudfront.net/leaflet-0.7.3/leaflet.css"
+    />
 
-    <head>
-        <title>Combine Harvester Simulation</title>
-        <link rel="stylesheet" href="https://d19vzq90twjlae.cloudfront.net/leaflet-0.7.3/leaflet.css" />
-        
+    <link rel="stylesheet" href="style.css" />
+  </head>
 
-        <link rel="stylesheet" href="style.css" />
-    </head>
+  <body>
+    <div id="container">
+      <div id="controls">
+        <div class="card" id="pathLink">
+          <h2 id="head1">Custom Path Simulation</h2>
+          <a class="button" href="./path.html">Create Custom Path</a>
+        </div>
+        <div class="card">
+          <h2>Input Data</h2>
+          <input type="file" id="input" />
+          <button onclick="processFile()">Start Simulation</button>
+        </div>
+        <div class="card">
+          <h2>Speed Control:</h2>
+          <h3>Playback Speed</h3>
 
-    <body>
-        <div id="container">
-            <div id="controls">
-                <div class="card" id="pathLink">
-                    <h2 id="head1">Custom Path Simulation</h2>
-                    <a class="button" href="./path.html">Create Custom Path</a>
-                </div>
-                <div class="card">
-                    <h2>Input Data</h2>
-                    <input type="file" id="input">
-                    <button onclick='processFile()'>Start Simulation</button>
+          <button onclick="changeSpeed(0)">Realtime</button>
+          <button onclick="changeSpeed(1)">10x</button>
+          <button onclick="changeSpeed(2)">20x</button>
+          <button onclick="changeSpeed(3)">50x</button>
+          <button onclick="changeSpeed(4)">100x</button>
+          <button onclick="changeSpeed(5)">200x</button>
 
-                </div>
-                <div class="card">
-                    <h2>Speed Control:</h2>
-                    <h3>Playback Speed</h3>
-                    
-                    <button onclick='changeSpeed(0)'>Realtime</button>
-                    <button onclick='changeSpeed(1)'>10x</button>
-                    <button onclick='changeSpeed(2)'>20x</button>
-                    <button onclick='changeSpeed(3)'>50x</button>
-                    <button onclick='changeSpeed(4)'>100x</button>
-                    <button onclick='changeSpeed(5)'>200x</button>
+          <h3>Selected Speed:</h3>
+          <span id="selectedSpeed">10x</span>
+          <h2>Combine Color:</h2>
+          <button onclick="changeColor(0)">Red</button>
+          <button onclick="changeColor(1)">Blue</button>
+          <button onclick="changeColor(2)">Yellow</button>
+          <img src="combine.png" class="combine" id="combineImage" />
 
-                    <h3>Selected Speed:</h3><span id="selectedSpeed">10x</span>
-                    <h2>Combine Color:</h2>
-                    <button onclick='changeColor(0)'>Red</button>
-                    <button onclick='changeColor(1)'>Blue</button>
-                    <button onclick='changeColor(2)'>Yellow</button>
-                    <img src="combine.png" class="combine" id="combineImage">
+          <p>*SETTINGS MUST SET BEFORE SIMULATION STARTS!*</p>
+        </div>
+        <div class="card">
+          <h2 id="head1">Checkout our GitHub Repository!</h2>
+          <a class="button" href="https://github.com/richzli/aitp-ccd-2020-jd"
+            >GitHub</a
+          >
+        </div>
+      </div>
+      <div id="mapContainer">
+        <div class="row">
+          <div class="card">
+            <h2>Latitude:</h2>
+            <p class="numText"><span id="lat" class="num">0°N</span></p>
+          </div>
 
-                    <p>*SETTINGS MUST SET BEFORE SIMULATION STARTS!*</p>
-                </div>
-                <div class="card">
-                    <h2 id="head1">Checkout our GitHub Repository!</h2>
-                    <a class="button" href="https://github.com/richzli/aitp-ccd-2020-jd">GitHub</a>
-                </div>
-            </div>
-            <div id="map"></div>
-            <div id="stats">
-                <div class="card">
-                    <h2>Total Yield:</h2>
-                    <p class="numText"><span id="yield" class="num">0</span> lbs</p>
-                </div>
+          <div class="card">
+            <h2>Longitude:</h2>
+            <p class="numText"><span id="long" class="num">0°E</span></p>
+          </div>
+        </div>
 
-                <div class="card">
-                    <h2>Average Yield/Second:</h2>
-                    <p class="numText"><span id="avg-yield" class="num">0</span> lbs</p>
-                </div>
+        <div id="map"></div>
+      </div>
+      <div id="stats">
+        <div class="card">
+          <h2>Total Yield:</h2>
+          <p class="numText"><span id="yield" class="num">0</span> lbs</p>
+        </div>
 
-                <div class="card">
-                    <h2>Latitude:</h2>
-                    <p class="numText"><span id="lat" class="num">0°N</span></p>
-                </div>
-
-                <div class="card">
-                    <h2>Longitude:</h2>
-                    <p class="numText"><span id="long" class="num">0°E</span></p>
-                </div>
+        <div class="card">
+          <h2>Average Yield/Second:</h2>
+          <p class="numText"><span id="avg-yield" class="num">0</span> lbs</p>
+        </div>
 
                 <div class="card">
                     <h2>Speed:</h2>
@@ -81,12 +88,14 @@
                 -->
             </div>
         </div>
+      </div>
+    </div>
 
-        <script src="https://d19vzq90twjlae.cloudfront.net/leaflet-0.7.3/leaflet.js"></script>
-        <script src="AnimatedMarker.js"></script>
-        <script src="Leaflet.RotatedMarker.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
-        <script src="charts.js"></script>
-        <script src="map.js"></script>
-    </body>
+    <script src="https://d19vzq90twjlae.cloudfront.net/leaflet-0.7.3/leaflet.js"></script>
+    <script src="AnimatedMarker.js"></script>
+    <script src="Leaflet.RotatedMarker.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
+    <script src="charts.js"></script>
+    <script src="map.js"></script>
+  </body>
 </html>

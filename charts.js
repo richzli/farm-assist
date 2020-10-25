@@ -83,7 +83,7 @@ const recentSpeedChart = new Chart(recentSpeedChartElement, {
       responsive: true,
       title: {
         display: true,
-        text: 'Total Speed'
+        text: 'Recent Speed'
       },
       scales: {
         x: {
