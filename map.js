@@ -58,9 +58,15 @@ function getDistanceFromLatLonInKm(latitude1,longitude1,latitude2,longitude2,uni
     }
 }
 
+
+const UPPER_OUTLIER_LIMIT = 16;
+let chartUpdate = 0;
+
 async function processFile() {
     time += 1;
     var spddd = runInterval;
+    let delayBetweenChartUpdate = 4 * spddd;
+
     var file = document.querySelector('#input').files[0];
     var reader = new FileReader();
     reader.readAsText(file);
@@ -134,27 +140,33 @@ async function processFile() {
                 if (prevlat != 0 && prevlong != 0) {
                     var speed = Math.round(getDistanceFromLatLonInKm(lat, long, prevlat, prevlong, "miles") / tt * 360000) / 100;
                     
-                    speedData.push(speed);
-                    recentSpeedData.push(speed);
-                    if (recentSpeedData.length > 20) {
-                        recentSpeedData.shift();
-                        recentSpeedLabels.shift();
-                    }
+                    chartUpdate -= spddd;
+                    if (chartUpdate <= 0 && speed < UPPER_OUTLIER_LIMIT) {
+                        speedData.push(speed);
+                        recentSpeedData.push(speed);
 
-                    if (speedLabels.length == 0) {
-                        speedLabels.push(0)
-                        recentSpeedLabels.push(0)
-                    } else{
-                        let newTime = (parseFloat(speedLabels[speedLabels.length-1]) + spddd/1000)
-                        speedLabels.push(newTime.toFixed(2))
-                        recentSpeedLabels.push(newTime.toFixed(2))
+                        // TODO 20 hardcoded recent value
+                        if (recentSpeedData.length > 20) {
+                            recentSpeedData.shift();
+                            recentSpeedLabels.shift();
+                        }
+    
+                        if (speedLabels.length == 0) {
+                            speedLabels.push(0)
+                            recentSpeedLabels.push(0)
+                        } else{
+                            let newTime = (parseFloat(speedLabels[speedLabels.length-1]) + spddd/1000)
+                            speedLabels.push(newTime.toFixed(2))
+                            recentSpeedLabels.push(newTime.toFixed(2))
+                        }
+                        chartUpdate = delayBetweenChartUpdate;
+                        speedChart.update();
+                        recentSpeedChart.update();
                     }
+                    // console.log(speedChart.data)
 
 
                     
-                    speedChart.update();
-                    recentSpeedChart.update();
-                    // console.log(speedChart.data)
 
                     document.getElementById("speed").textContent = speed;
                     tt = 0;
