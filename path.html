@@ -1,12 +1,13 @@
 <html>
 
     <head>
-        <title>A Leaflet map!</title>
+        <title>Custom Path Simulation</title>
         <link rel="stylesheet" href="https://d19vzq90twjlae.cloudfront.net/leaflet-0.7.3/leaflet.css" />
         <script src="https://d19vzq90twjlae.cloudfront.net/leaflet-0.7.3/leaflet.js"></script>
         <script type="text/javascript" src="MovingMarker.js"></script>
         <script src="AnimatedMarker.js"></script>
         <script src="Leaflet.RotatedMarker.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
 
         <link rel="stylesheet" href="style.css" />
     </head>
@@ -14,20 +15,23 @@
     <body>
         <div id="container">
             <div id="controls">
+                <div class="card" id="pathLink">
+                    <h2 id="head1">Combine Simulator</h2>
+                    <a class="button" href="./index.html">Home</a>
+                </div>
                 <div class="card">
                     <h2>Input Data</h2>
                     <input type="file" id="input">
                     <button onclick='processFile()'>upload dataset</button>
-
                 </div>
                 <div class="card">
                     <h2>Distance:</h2>
                     <p class="numText"><span id="dist" class="num">0</span> m</p>
                 </div>
-
                 <div class="card">
                     <h2>Total Yield:</h2>
                     <p class="numText"><span id="yield" class="num">0</span> lbs</p>
+                    <canvas id="yieldChart" width="200" height="200"></canvas>
                 </div>
                 
             </div>
