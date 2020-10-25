@@ -6,8 +6,8 @@ const recentSpeedData = []
 const recentSpeedLabels = []
 const recentSpeedChartElement = document.getElementById('recentSpeedChart');
 
-const radarData = []
-const radarLabels = []
+var radarData = []
+var radarLabels = []
 const radarChartElement = document.getElementById('radarChart');
 
 const kylecolors = {
