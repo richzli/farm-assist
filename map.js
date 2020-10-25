@@ -80,7 +80,12 @@ async function processFile() {
 
             var lat = parseFloat(cols[1]);
             var long = parseFloat(cols[0]);
-            
+            var flow = parseFloat(cols[2]);
+            var distance = parseFloat(cols[5]);
+            var elevation = parseFloat(cols[14]);
+
+            radarData = [lat, long, flow, distance, elevation];
+            radarLabels = ['latitude', 'longitude', 'flow', 'distance', 'elevation'];
             //alert(lat, long);
 
             if (!isNaN(lat) && !isNaN(long)) {
@@ -115,6 +120,16 @@ async function processFile() {
         var tt = 0;
         for (var i = rows.length - 1; i > 0 && time == curr; i--) {
             cols = rows[i].split(',');
+
+            var lat = parseFloat(cols[1]);
+            var long = parseFloat(cols[0]);
+            var flow = parseFloat(cols[2]);
+            var distance = parseFloat(cols[5]);
+            var elevation = parseFloat(cols[14]);
+
+            radarData = [lat, long, flow, distance, elevation];
+            radarLabels = ['latitude', 'longitude', 'flow', 'distance', 'elevation'];
+            radarChart.update();
             
             // yield
             if (!isNaN(parseFloat(cols[2]))) {
