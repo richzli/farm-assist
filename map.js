@@ -1,4 +1,6 @@
 // initialize the map
+// I think zoom controls are nice to have
+// {zoomControl:false, scrollWheelZoom: false}
 var map = L.map('map').setView([42.408276, -85.372824], 6);
 var time = 0;
 var markers = [];
@@ -83,25 +85,8 @@ async function processFile() {
 
             if (!isNaN(lat) && !isNaN(long)) {
                 dat.push([lat, long]);
-                //var marker = L.marker([lat, long]).addTo(map);
-            }
-            
-            //move column by column
-            for (var j = 0; j < cols.length; j++) {
-                var value = cols[j];
             }
         }
-
-        var latAvg = 0;
-        var longAvg = 0;
-
-        for (x of dat) {
-            latAvg += x[0];
-            longAvg += x[1];
-        }
-        
-        latAvg /= dat.length;
-        longAvg /= dat.length;
 
         markers.forEach(function(marker) {
             map.removeLayer(marker);
@@ -149,6 +134,11 @@ async function processFile() {
                 if (prevlat != 0 && prevlong != 0) {
                     var speed = Math.round(getDistanceFromLatLonInKm(lat, long, prevlat, prevlong, "miles") / tt * 360000) / 100;
                     console.log(speed);
+                    
+                    speedData.push(speed);
+                    speedChart.update();
+                    // console.log(speedChart)
+
                     document.getElementById("speed").textContent = speed;
                     tt = 0;
                 }

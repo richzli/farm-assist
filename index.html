@@ -3,10 +3,7 @@
     <head>
         <title>Combine Harvester Simulation</title>
         <link rel="stylesheet" href="https://d19vzq90twjlae.cloudfront.net/leaflet-0.7.3/leaflet.css" />
-        <script src="https://d19vzq90twjlae.cloudfront.net/leaflet-0.7.3/leaflet.js"></script>
-        <script type="text/javascript" src="MovingMarker.js"></script>
-        <script src="AnimatedMarker.js"></script>
-        <script src="Leaflet.RotatedMarker.js"></script>
+        
 
         <link rel="stylesheet" href="style.css" />
     </head>
@@ -70,13 +67,18 @@
                 <div class="card">
                     <h2>Speed:</h2>
                     <p class="numText"><span id="speed" class="num">0</span> mph</p>
+                    <canvas id="speedChart" width="200" height="200"></canvas>
                 </div>
 
                 
             </div>
         </div>
+
+        <script src="https://d19vzq90twjlae.cloudfront.net/leaflet-0.7.3/leaflet.js"></script>
+        <script src="AnimatedMarker.js"></script>
+        <script src="Leaflet.RotatedMarker.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
+        <script src="charts.js"></script>
         <script src="map.js"></script>
-        <script src="Leaflet.imageTransform.js"></script>
-        <script src="map2.js"></script>
     </body>
 </html>

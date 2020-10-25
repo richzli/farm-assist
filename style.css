@@ -18,7 +18,7 @@
 
 #map {
     margin:8px;
-    flex:2;
+    flex:3;
     width: 600px;
     height: 600px;
     border-radius: 4px;
@@ -26,7 +26,7 @@
 
 #stats {
     margin:8px;
-    flex:1;
+    flex:2;
     /* padding: 50px; */
 }
 
@@ -85,5 +85,5 @@ a.button {
 }
 
 .combine{
-    max-width: 100px;
+    max-width: 150px;
 }
