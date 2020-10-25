@@ -10,7 +10,7 @@ const yieldData = []
 
 var radarData = []
 var radarLabels = []
-const radarChartElement = document.getElementById('radarChart');
+//const radarChartElement = document.getElementById('radarChart');
 
 const kylecolors = {
   red:'#FF6384',

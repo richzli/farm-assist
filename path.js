@@ -39,7 +39,7 @@ function onMapClick(e) {
         document.getElementById("yield").textContent = dist * rate;
         document.getElementById("dist").textContent = dist;
         yieldChart.update();
-        console.log(yieldLabels);
+        //console.log(yieldLabels);
     }
 }
 
@@ -49,8 +49,9 @@ var yieldChart = new Chart(ctx, {
     labels: yieldLabels,
     data: {
         datasets: [{
-            label: '# of Votes',
+            label: 'Harvest Amount (lbs)',
             data: yieldData,
+            borderColor: '#36A2EB'
         }]
     },
     options: {
@@ -112,6 +113,6 @@ async function processFile() {
 
         rate = rateAvg;
 
-        alert(rate);
+        //alert(rate);
     }
 }
