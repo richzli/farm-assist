@@ -36,7 +36,7 @@ const speedChart = new Chart(speedChartElement, {
     legend: {
       display: false,
     },
-    responsive: true,
+    // responsive: true,
     title: {
       display: true,
       text: "Total Speed",
@@ -101,7 +101,7 @@ const recentSpeedChart = new Chart(recentSpeedChartElement, {
     legend: {
       display: false,
     },
-    responsive: true,
+    // responsive: true,
     title: {
       display: true,
       text: "Recent Speed",
