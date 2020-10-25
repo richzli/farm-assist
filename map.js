@@ -133,11 +133,28 @@ async function processFile() {
                 document.getElementById("long").textContent = Math.abs(long).toString() + (long >= 0 ? "°E": "°W");
                 if (prevlat != 0 && prevlong != 0) {
                     var speed = Math.round(getDistanceFromLatLonInKm(lat, long, prevlat, prevlong, "miles") / tt * 360000) / 100;
-                    console.log(speed);
                     
                     speedData.push(speed);
+                    recentSpeedData.push(speed);
+                    if (recentSpeedData.length > 20) {
+                        recentSpeedData.shift();
+                        recentSpeedLabels.shift();
+                    }
+
+                    if (speedLabels.length == 0) {
+                        speedLabels.push(0)
+                        recentSpeedLabels.push(0)
+                    } else{
+                        let newTime = (parseFloat(speedLabels[speedLabels.length-1]) + spddd/1000)
+                        speedLabels.push(newTime.toFixed(2))
+                        recentSpeedLabels.push(newTime.toFixed(2))
+                    }
+
+
+                    
                     speedChart.update();
-                    // console.log(speedChart)
+                    recentSpeedChart.update();
+                    // console.log(speedChart.data)
 
                     document.getElementById("speed").textContent = speed;
                     tt = 0;
