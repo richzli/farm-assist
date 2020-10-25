@@ -6,6 +6,8 @@ const recentSpeedData = []
 const recentSpeedLabels = []
 const recentSpeedChartElement = document.getElementById('recentSpeedChart');
 
+const yieldData = []
+
 var radarData = []
 var radarLabels = []
 const radarChartElement = document.getElementById('radarChart');
@@ -73,6 +75,14 @@ const recentSpeedChart = new Chart(recentSpeedChartElement, {
 					backgroundColor: 'rgba(0, 0, 0, 0)',
           fill: false,
           
+					// cubicInterpolationMode: 'monotone'
+				},
+        {
+					label: 'Crop Yield',
+					data: yieldData,
+					borderColor: kylecolors.yellow,
+					backgroundColor: 'rgba(0, 0, 0, 0)',
+          fill: false,
 					// cubicInterpolationMode: 'monotone'
 				},]
     },

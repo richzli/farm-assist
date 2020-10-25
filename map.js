@@ -137,11 +137,21 @@ async function processFile() {
             radarLabels = ['latitude', 'longitude', 'flow', 'distance', 'elevation'];
             radarChart.update();
             
+            chartUpdate -= spddd;
+
             // yield
             if (!isNaN(parseFloat(cols[2]))) {
                 sum += parseFloat(cols[2]);
                 document.getElementById("yield").textContent = Math.round(sum * 100)/100;
                 document.getElementById("avg-yield").textContent = Math.round(sum * 100 / (rows.length - i)) / 100;
+
+                if (chartUpdate <= 0) {
+                    yieldData.push(speed);
+                    // TODO 20 hardcoded recent value
+                    if (yieldData.length > 20) {
+                        yieldData.shift();
+                    }
+                }
             }
 
             // speed and position
@@ -155,7 +165,6 @@ async function processFile() {
                 if (prevlat != 0 && prevlong != 0) {
                     var speed = Math.round(getDistanceFromLatLonInKm(lat, long, prevlat, prevlong, "miles") / tt * 360000) / 100;
                     
-                    chartUpdate -= spddd;
                     if (chartUpdate <= 0 && speed < UPPER_OUTLIER_LIMIT) {
                         speedData.push(speed);
                         recentSpeedData.push(speed);
