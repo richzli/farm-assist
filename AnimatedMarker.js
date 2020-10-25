@@ -76,9 +76,18 @@ L.AnimatedMarker = L.Marker.extend({
       this.setLatLng(this._latlngs[this._i]);
       this._i++;
 
-      //this.setRotationOrigin('center center');
-      //console.log(toString(Math.atan((parseFloat(this._latlngs.long) - parseFloat(this.latlongs.long)) / (parseFloat(this._latlngs.lat) - parseFloat(this.latlongs.lat))) * 180 / Math.PI));
-      //this.setRotationAngle(Math.atan((this._latlngs.long - this.latlongs.long) / (this._latlngs.lat - this.latlongs.lat)) * 180 / Math.PI);
+      this.setRotationOrigin('center center');
+      //if (!isNaN(Math.atan(((this._latlngs[this._i - 1][1]) - (this.latlongs[this._i][1])) / ((this._latlngs[this._i - 1][0]) - (this.latlongs[this._i][0]))) * 180 / Math.PI)) {
+      //console.log(Math.atan(((this._latlngs[this._i - 1][1]) - (this._latlongs[this._i][1])) / ((this._latlngs[this._i - 1][0]) - (this._latlongs[this._i][0]))) * 180 / Math.PI);
+      //}
+
+      console.log(Math.atan((this._latlngs[this._i - 1][1] - this._latlngs[this._i][1]) / (this._latlngs[this._i - 1][0] - this._latlngs[this._i][0])) * 180 / Math.PI);
+
+      //console.log(this._latlngs[this._i - 1][1]);
+      //console.log(this._latlngs[this._i][1]);
+      //console.log(this._latlngs[this._i - 1][0]);
+      //console.log(this._latlngs[this._i][0]);
+      this.setRotationAngle(Math.atan((this._latlngs[this._i - 1][1] - this._latlngs[this._i][1]) / (this._latlngs[this._i - 1][0] - this._latlngs[this._i][0])) * 180 / Math.PI);
   
       // Queue up the animation to the next next vertex
       this._tid = setTimeout(function(){
